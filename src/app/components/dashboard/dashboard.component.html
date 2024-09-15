@@ -1,0 +1,41 @@
+<h2 class="text-2xl font-bold mb-4">Dashboard</h2>
+<div class="mb-8">
+  <h3 class="text-xl font-semibold mb-2">Habits to complete today:</h3>
+  <ul class="list-disc list-inside">
+    @for (habit of todaysHabits; track habit.$id) {
+    <li class="flex items-center justify-between mb-2">
+      <span>{{ habit.name }}</span>
+      <button
+        (click)="completeHabit(habit.$id)"
+        class="bg-green-500 hover:bg-green-600 text-white font-bold py-1 px-3 rounded"
+      >
+        Complete
+      </button>
+    </li>
+    }
+  </ul>
+</div>
+<div>
+  <h3 class="text-xl font-semibold mb-2">All Habits:</h3>
+  <ul class="space-y-2">
+    @for (habit of allHabits; track habit.$id) {
+    <li class="bg-white p-4 rounded shadow">
+      <a
+        [routerLink]="['/habit', habit.$id]"
+        class="text-lg font-medium text-blue-500 hover:underline"
+      >
+        {{ habit.name }}
+      </a>
+      <p class="text-sm text-gray-600">
+        Current streak: {{ habit.streak }} days
+      </p>
+    </li>
+    }
+  </ul>
+</div>
+<button
+  (click)="createHabit()"
+  class="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+>
+  Create New Habit
+</button>
